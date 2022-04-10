@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Planejamento"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/Planejamento" />
+        <item
+            android:id="@+id/nav_Gerir"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/GerirReceita" />
+        <item
+            android:id="@+id/nav_Controle"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/ControleSaldo" />
+        <item
+            android:id="@+id/nav_Alerta"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/AlertaGastos" />
+        <item
+            android:id="@+id/nav_Educacional"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/ConteudoEducacional" />
+        <item
+            android:id="@+id/nav_Indicadores"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/Indicadores" />
+        <item
+            android:id="@+id/nav_Dicas"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/Dicas" />
+        <item
+            android:id="@+id/nav_Metas"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/Metas" />
+        <item
+            android:id="@+id/nav_Forum"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/Forum" />
+        <item
+            android:id="@+id/nav_Perfil"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/Perfil" />
+        <item
+            android:id="@+id/nav_Sair"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:onClick="Logout"
+            android:title="@string/Sair" />
+    </group>
+</menu>

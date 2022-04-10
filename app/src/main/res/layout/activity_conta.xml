@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".conta">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="226dp"
+            android:layout_height="195dp"
+            android:layout_marginStart="93dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="93dp"
+            android:layout_marginBottom="491dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/capturar2"
+            tools:srcCompat="@drawable/capturar2" />
+
+        <EditText
+            android:id="@+id/Nome"
+            android:layout_width="308dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginBottom="384dp"
+            android:hint="@string/Nome"
+            android:inputType="textEmailAddress"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/Sobrenome"
+            android:layout_width="307dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginBottom="304dp"
+            android:hint="@string/Sobrenome"
+            android:inputType="textEmailAddress"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/Email"
+            android:layout_width="308dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginBottom="228dp"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="302dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginBottom="160dp"
+            android:hint="@string/prompt_password"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/Salvar"
+            android:layout_width="327dp"
+            android:layout_height="54dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="21dp"
+            android:layout_marginBottom="84dp"
+            android:text="@string/Salvar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/CancelarConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="156dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/CancelarConta"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.STUDEOFINEDUCAÇÃOFINANCEIRA.AppBarOverlay"/>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
