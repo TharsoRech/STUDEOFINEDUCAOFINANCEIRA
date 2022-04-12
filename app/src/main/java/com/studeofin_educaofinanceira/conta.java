@@ -46,6 +46,7 @@ public class conta extends AppCompatActivity {
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     public YourPreference yourPrefrence;
+    boolean logado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class conta extends AppCompatActivity {
         ImageView photoButton = this.findViewById(R.id.imageView6);
         this.imageView = photoButton;
         yourPrefrence = YourPreference.getInstance(conta.this);
+        logado = yourPrefrence.getDataBoolean("Logado");
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -122,14 +124,22 @@ public class conta extends AppCompatActivity {
                     msgbox("Erro no Cadastro de usuário","E-mail não é um e-mail válido");
                 }
                 if(PodeContinuar){
-                    msgboxSucesso("Sucesso","Usuário Cadastrado com sucesso");
+                    if(logado){
+                        msgboxSucessoLogado("Sucesso","Usuário Alterado com sucesso");
+                    }
+                    else{
+                        yourPrefrence.saveData("EmailUser",Email.getText().toString());
+                        yourPrefrence.saveData("Nome",nome.getText().toString());
+                        yourPrefrence.saveData("Sobrenome",Sobrenome.getText().toString());
+                        msgboxSucesso("Sucesso","Usuário Cadastrado com sucesso");
+                    }
+
                 }
             }
         });
         CancelarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean logado = yourPrefrence.getDataBoolean("Logado");
                 if(logado){
                     Intent myIntent = new Intent(conta.this, Cancelar_Activity.class);
                     conta.this.startActivity(myIntent);
@@ -142,6 +152,11 @@ public class conta extends AppCompatActivity {
                 }
             }
         });
+        if(logado){
+            Email.setText(yourPrefrence.getData("EmailUser"));
+            nome.setText(yourPrefrence.getData("Nome"));
+            Sobrenome.setText(yourPrefrence.getData("Sobrenome"));
+        }
     }
 
     private boolean isEmailValid(String username) {
@@ -177,6 +192,22 @@ public class conta extends AppCompatActivity {
         dlgAlert.setPositiveButton("OK",new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 Intent myIntent = new Intent(conta.this, LoginActivity.class);
+                conta.this.startActivity(myIntent);
+                conta.this.finish();
+            }
+        });
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+    }
+
+    public void msgboxSucessoLogado(String str,String str2)
+    {
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setTitle(str);
+        dlgAlert.setMessage(str2);
+        dlgAlert.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Intent myIntent = new Intent(conta.this, DashBoard.class);
                 conta.this.startActivity(myIntent);
                 conta.this.finish();
             }

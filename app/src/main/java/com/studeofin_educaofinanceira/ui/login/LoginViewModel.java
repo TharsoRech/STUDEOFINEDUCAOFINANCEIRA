@@ -11,12 +11,14 @@ import com.studeofin_educaofinanceira.data.LoginRepository;
 import com.studeofin_educaofinanceira.data.Result;
 import com.studeofin_educaofinanceira.data.model.LoggedInUser;
 import com.studeofin_educaofinanceira.R;
+import com.studeofin_educaofinanceira.data.model.YourPreference;
 
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
+
 
     LoginViewModel(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;

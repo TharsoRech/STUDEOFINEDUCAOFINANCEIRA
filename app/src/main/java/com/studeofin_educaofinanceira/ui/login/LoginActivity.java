@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.RestrictionEntry;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -182,6 +183,7 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUiWithUser(LoggedInUserView model) {
         try{
             yourPrefrence.saveData("Logado",true);
+            yourPrefrence.saveData("EmailUser",model.getDisplayName());
             Intent myIntent = new Intent(LoginActivity.this, DashBoard.class);
             LoginActivity.this.startActivity(myIntent);
             LoginActivity.this.finish();
