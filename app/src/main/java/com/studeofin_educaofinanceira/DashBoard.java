@@ -69,5 +69,12 @@ public class DashBoard extends AppCompatActivity {
     public void Logout(MenuItem item){
         Intent myIntent = new Intent(DashBoard.this, Logout.class);
         DashBoard.this.startActivity(myIntent);
+        DashBoard.this.finish();
+    }
+
+    public void Perfil(MenuItem item){
+        Intent myIntent = new Intent(DashBoard.this, conta.class);
+        DashBoard.this.startActivity(myIntent);
+        DashBoard.this.finish();
     }
 }

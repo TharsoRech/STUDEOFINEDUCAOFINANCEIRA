@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -26,6 +27,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.studeofin_educaofinanceira.data.model.YourPreference;
 import com.studeofin_educaofinanceira.recuperar_senha;
 import com.studeofin_educaofinanceira.conta;
 import com.studeofin_educaofinanceira.DashBoard;
@@ -38,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    public  YourPreference yourPrefrence;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -170,12 +174,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        yourPrefrence = YourPreference.getInstance(LoginActivity.this);
+        yourPrefrence.saveData("Logado",false);
+
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
         try{
+            yourPrefrence.saveData("Logado",true);
             Intent myIntent = new Intent(LoginActivity.this, DashBoard.class);
-            myIntent.putExtra("key", model.getDisplayName()); //Optional parameters
             LoginActivity.this.startActivity(myIntent);
             LoginActivity.this.finish();
         }

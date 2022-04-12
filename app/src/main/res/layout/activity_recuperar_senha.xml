@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/capturar" />
 
     <EditText
-        android:id="@+id/username6"
+        android:id="@+id/Email"
         android:layout_width="380dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
@@ -31,13 +31,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/login6"
+        android:id="@+id/Salvar"
         android:layout_width="375dp"
         android:layout_height="56dp"
         android:layout_gravity="start"
         android:layout_marginStart="21dp"
         android:layout_marginBottom="260dp"
         android:text="@string/Salvar"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

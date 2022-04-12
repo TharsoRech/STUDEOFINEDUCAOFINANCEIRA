@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -26,13 +27,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.studeofin_educaofinanceira.data.model.YourPreference;
 import com.studeofin_educaofinanceira.databinding.ActivityContaBinding;
 import com.studeofin_educaofinanceira.ui.login.LoginActivity;
+
 
 public class conta extends AppCompatActivity {
 
@@ -41,6 +45,7 @@ public class conta extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
+    public YourPreference yourPrefrence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,29 @@ public class conta extends AppCompatActivity {
         final EditText Sobrenome = binding.Sobrenome;
         ImageView photoButton = this.findViewById(R.id.imageView6);
         this.imageView = photoButton;
+        yourPrefrence = YourPreference.getInstance(conta.this);
+        TextWatcher afterTextChangedListener = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // ignore
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // ignore
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(isEmailValid(Email.getText().toString())){
+                    SalvarButton.setEnabled(true);
+                }
+                else{
+                    SalvarButton.setEnabled(false);
+                }
+            }
+        };
+        Email.addTextChangedListener(afterTextChangedListener);
         photoButton.setOnClickListener(new View.OnClickListener()
         {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -101,9 +129,17 @@ public class conta extends AppCompatActivity {
         CancelarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(conta.this, LoginActivity.class);
-                conta.this.startActivity(myIntent);
-                conta.this.finish();
+                boolean logado = yourPrefrence.getDataBoolean("Logado");
+                if(logado){
+                    Intent myIntent = new Intent(conta.this, Cancelar_Activity.class);
+                    conta.this.startActivity(myIntent);
+                    conta.this.finish();
+                }
+                else{
+                    Intent myIntent = new Intent(conta.this, LoginActivity.class);
+                    conta.this.startActivity(myIntent);
+                    conta.this.finish();
+                }
             }
         });
     }
