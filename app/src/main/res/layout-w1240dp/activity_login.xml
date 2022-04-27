@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/capturar" />
+        app:srcCompat="@drawable/studeofin" />
 
     <ProgressBar
         android:id="@+id/loading"

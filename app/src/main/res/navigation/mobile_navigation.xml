@@ -7,59 +7,59 @@
 
     <fragment
         android:id="@+id/nav_Planejamento"
-        android:name="com.studeofin_educaofinanceira.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.studeofin_educaofinanceira.PlanejamentoFinanceiroFragment"
+        android:label="@string/Planejamento"
+        tools:layout="@layout/fragment_planejamento_financeiro" />
 
     <fragment
         android:id="@+id/nav_Gerir"
-        android:name="com.studeofin_educaofinanceira.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:name="com.studeofin_educaofinanceira.GerirDespesasFragment"
+        android:label="@string/GerirReceita"
+        tools:layout="@layout/fragment_gerir_despesas" />
 
     <fragment
         android:id="@+id/nav_Controle"
-        android:name="com.studeofin_educaofinanceira.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.studeofin_educaofinanceira.ControleSaldoFragment"
+        android:label="@string/ControleSaldo"
+        tools:layout="@layout/fragment_controle_saldo" />
     <fragment
         android:id="@+id/nav_Alerta"
-        android:name="com.studeofin_educaofinanceira.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.studeofin_educaofinanceira.AlertasFragment"
+        android:label="@string/AlertaGastos"
+        tools:layout="@layout/fragment_alertas" />
     <fragment
         android:id="@+id/nav_Educacional"
-        android:name="com.studeofin_educaofinanceira.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.studeofin_educaofinanceira.ConteudoEducacionalFragment"
+        android:label="@string/ConteudoEducacional"
+        tools:layout="@layout/fragment_conteudo_educacional" />
     <fragment
         android:id="@+id/nav_Indicadores"
-        android:name="com.studeofin_educaofinanceira.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.studeofin_educaofinanceira.IndicadoresFinanceirosFragment"
+        android:label="@string/Indicadores"
+        tools:layout="@layout/fragment_indicadores_financeiros" />
     <fragment
         android:id="@+id/nav_Dicas"
-        android:name="com.studeofin_educaofinanceira.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.studeofin_educaofinanceira.DicasInvestimentoFragment"
+        android:label="@string/Dicas"
+        tools:layout="@layout/fragment_dicas_investimento" />
     <fragment
         android:id="@+id/nav_Metas"
-        android:name="com.studeofin_educaofinanceira.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.studeofin_educaofinanceira.MetasFragment"
+        android:label="@string/Metas"
+        tools:layout="@layout/fragment_metas" />
     <fragment
         android:id="@+id/nav_Forum"
-        android:name="com.studeofin_educaofinanceira.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.studeofin_educaofinanceira.ForumFragment"
+        android:label="@string/Forum"
+        tools:layout="@layout/fragment_forum" />
     <fragment
         android:id="@+id/nav_Perfil"
         android:name="com.studeofin_educaofinanceira.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:label="@string/Perfil"
+        tools:layout="@layout/activity_conta" />
     <fragment
         android:id="@+id/nav_Sair"
         android:name="com.studeofin_educaofinanceira.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:label="@string/Sair"
+        tools:layout="@layout/activity_logout" />
 </navigation>

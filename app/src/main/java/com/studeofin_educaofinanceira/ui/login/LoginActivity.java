@@ -29,6 +29,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.studeofin_educaofinanceira.data.LoginRepository;
 import com.studeofin_educaofinanceira.data.model.YourPreference;
 import com.studeofin_educaofinanceira.recuperar_senha;
 import com.studeofin_educaofinanceira.conta;
@@ -37,6 +46,20 @@ import com.studeofin_educaofinanceira.R;
 import com.studeofin_educaofinanceira.ui.login.LoginViewModel;
 import com.studeofin_educaofinanceira.ui.login.LoginViewModelFactory;
 import com.studeofin_educaofinanceira.databinding.ActivityLoginBinding;
+
+import org.json.JSONObject;
+
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.X509TrustManager;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -61,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
         final TextView CriarContaButton = binding.CriarConta;
         final TextView SairButton = binding.SairApp;
         final ProgressBar loadingProgressBar = binding.loading;
-
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -94,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+                //finish();
             }
         });
 
@@ -176,28 +198,124 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         yourPrefrence = YourPreference.getInstance(LoginActivity.this);
+        //yourPrefrence.removeData("Foto");
+       // yourPrefrence.saveData("HasFoto",false);
         yourPrefrence.saveData("Logado",false);
 
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
         try{
-            yourPrefrence.saveData("Logado",true);
-            yourPrefrence.saveData("EmailUser",model.getDisplayName());
-            Intent myIntent = new Intent(LoginActivity.this, DashBoard.class);
-            LoginActivity.this.startActivity(myIntent);
-            LoginActivity.this.finish();
+           yourPrefrence.saveData("Logado",true);
+          yourPrefrence.saveData("EmailUser",model.getDisplayName());
+          Intent myIntent = new Intent(LoginActivity.this, DashBoard.class);
+          LoginActivity.this.startActivity(myIntent);
+          LoginActivity.this.finish();
         }
         catch (Exception ex){
-            AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
-            alertDialog.setTitle("Alert Dialog");
-            alertDialog.setMessage(ex.getMessage());
-            alertDialog.show();
+           msgbox("Erro no Login",ex.getMessage());
         }
     }
 
+    private void updateUiWithUserTeste(LoggedInUserView model) {
+        try{
+            trustEveryone();
+            String url = "https://10.0.2.2:44326/api/Login/Logar?email=tharso_rech@hotmail.com&senha=teste";
+            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+            JSONObject obj = new JSONObject();
+            obj.put("id", "1");
+            obj.put("name", "myname");
+
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET,url,null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            msgbox("Resppota",response.toString());
+                            yourPrefrence.saveData("Logado",true);
+                            yourPrefrence.saveData("EmailUser",model.getDisplayName());
+                            Intent myIntent = new Intent(LoginActivity.this, DashBoard.class);
+                            LoginActivity.this.startActivity(myIntent);
+                            LoginActivity.this.finish();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            msgbox("Erro no Login",error.getMessage() + "Houve um erro na comunicação verifique sua internet");
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    // below line we are creating a map for
+                    // storing our values in key and value pair.
+                    Map<String, String> params = new HashMap<String, String>();
+                    // params.put("email", "tharso_rech@hotmail.com");
+                    // params.put("senha", "teste");
+
+                    // at last we are
+                    // returning our params.
+                    return params;
+                }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+            };
+
+            queue.add(jsObjRequest);
+        }
+        catch (Exception ex){
+            Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void trustEveryone() {
+        try {
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }});
+            SSLContext context = SSLContext.getInstance("TLS");
+            context.init(null, new X509TrustManager[]{new X509TrustManager(){
+                public void checkClientTrusted(X509Certificate[] chain,
+                                               String authType) throws CertificateException {}
+                public void checkServerTrusted(X509Certificate[] chain,
+                                               String authType) throws CertificateException {}
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }}}, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(
+                    context.getSocketFactory());
+        } catch (Exception ex) { // should never happen
+            msgbox("Erro ao ativar ssl para todos",ex.getMessage());
+        }
+    }
+
+
+    public void msgbox(String str,String str2)
+    {
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setTitle(str);
+        dlgAlert.setMessage(str2);
+        dlgAlert.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
     }
 
 

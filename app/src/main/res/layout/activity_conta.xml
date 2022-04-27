@@ -12,6 +12,16 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <TextView
+            android:id="@+id/cancelarConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="156dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/CancelarConta"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="226dp"
@@ -20,10 +30,10 @@
             android:layout_marginTop="45dp"
             android:layout_marginEnd="93dp"
             android:layout_marginBottom="491dp"
+            android:adjustViewBounds="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:adjustViewBounds="true"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/capturar2"
             tools:srcCompat="@drawable/capturar2" />
@@ -93,12 +103,12 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/CancelarConta"
+            android:id="@+id/Sair"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="156dp"
+            android:layout_marginStart="332dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/CancelarConta"
+            android:text="@string/Sair"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,25 +22,50 @@ public class YourPreference {
 
     public void saveData(String key,String value) {
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
-        prefsEditor .putString(key, value);
+        prefsEditor.putString(key, value);
         prefsEditor.commit();
     }
     public void saveData(String key,Boolean value) {
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
-        prefsEditor .putBoolean(key, value);
+        prefsEditor.putBoolean(key, value);
         prefsEditor.commit();
+
+    }
+
+    public void removeData(String key) {
+        try{
+            SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+            prefsEditor.remove(key);
+            prefsEditor.commit();
+        }
+        catch (Exception ex){
+
+        }
     }
 
     public String getData(String key) {
-        if (sharedPreferences!= null) {
-            return sharedPreferences.getString(key, "");
+        try{
+            if (sharedPreferences!= null) {
+                return sharedPreferences.getString(key, "");
+
+            }
+            return "";
         }
-        return "";
+        catch (Exception ex)
+        {
+            return "";
+        }
     }
     public Boolean getDataBoolean(String key) {
-        if (sharedPreferences!= null) {
-            return sharedPreferences.getBoolean(key, false);
+        try{
+            if (sharedPreferences!= null) {
+                return sharedPreferences.getBoolean(key, false);
+            }
+            return false;
         }
-        return false;
+        catch (Exception ex){
+            return false;
+        }
+
     }
 }

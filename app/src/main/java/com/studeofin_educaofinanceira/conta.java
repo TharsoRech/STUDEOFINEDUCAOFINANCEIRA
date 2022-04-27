@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +39,8 @@ import com.studeofin_educaofinanceira.data.model.YourPreference;
 import com.studeofin_educaofinanceira.databinding.ActivityContaBinding;
 import com.studeofin_educaofinanceira.ui.login.LoginActivity;
 
+import java.io.ByteArrayOutputStream;
+
 
 public class conta extends AppCompatActivity {
 
@@ -47,6 +51,7 @@ public class conta extends AppCompatActivity {
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     public YourPreference yourPrefrence;
     boolean logado = false;
+    boolean HasFoto = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,8 @@ public class conta extends AppCompatActivity {
         binding = ActivityContaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         final Button SalvarButton = binding.Salvar;
-        final TextView CancelarButton = binding.CancelarConta;
+        final TextView CancelarButton = binding.cancelarConta;
+        final TextView sairButton = binding.Sair;
         final EditText Email = binding.Email;
         final EditText Senha = binding.password;
         final EditText nome = binding.Nome;
@@ -125,12 +131,17 @@ public class conta extends AppCompatActivity {
                 }
                 if(PodeContinuar){
                     if(logado){
+                        yourPrefrence.saveData("EmailUser",Email.getText().toString());
+                        yourPrefrence.saveData("Nome",nome.getText().toString());
+                        yourPrefrence.saveData("Sobrenome",Sobrenome.getText().toString());
+                        yourPrefrence.saveData("HasFoto",HasFoto);
                         msgboxSucessoLogado("Sucesso","Usuário Alterado com sucesso");
                     }
                     else{
                         yourPrefrence.saveData("EmailUser",Email.getText().toString());
                         yourPrefrence.saveData("Nome",nome.getText().toString());
                         yourPrefrence.saveData("Sobrenome",Sobrenome.getText().toString());
+                        yourPrefrence.saveData("HasFoto",HasFoto);
                         msgboxSucesso("Sucesso","Usuário Cadastrado com sucesso");
                     }
 
@@ -152,10 +163,30 @@ public class conta extends AppCompatActivity {
                 }
             }
         });
+        sairButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(logado){
+                    Intent myIntent = new Intent(conta.this, DashBoard.class);
+                    conta.this.startActivity(myIntent);
+                    conta.this.finish();
+                }
+                else{
+                    Intent myIntent = new Intent(conta.this, LoginActivity.class);
+                    conta.this.startActivity(myIntent);
+                    conta.this.finish();
+                }
+            }
+        });
         if(logado){
             Email.setText(yourPrefrence.getData("EmailUser"));
             nome.setText(yourPrefrence.getData("Nome"));
             Sobrenome.setText(yourPrefrence.getData("Sobrenome"));
+            HasFoto = yourPrefrence.getDataBoolean("HasFoto");
+            if(HasFoto){
+                String image = yourPrefrence.getData("Foto");
+                imageView.setImageBitmap(StringToBitMap(image));
+            }
         }
     }
 
@@ -239,10 +270,30 @@ public class conta extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
+            yourPrefrence.saveData("Foto",BitMapToString(photo));
+            HasFoto = true;
             imageView.setImageBitmap(photo);
         }
     }
 
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
 
 
 }

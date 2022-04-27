@@ -16,7 +16,7 @@
         android:layout_marginEnd="92dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/capturar" />
+        app:srcCompat="@drawable/studeofin" />
 
     <EditText
         android:id="@+id/Email"

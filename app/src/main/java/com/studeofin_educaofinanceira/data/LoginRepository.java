@@ -1,5 +1,7 @@
 package com.studeofin_educaofinanceira.data;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.studeofin_educaofinanceira.data.model.LoggedInUser;
 
 /**
@@ -51,4 +53,6 @@ public class LoginRepository {
         }
         return result;
     }
+
+
 }
