@@ -24,8 +24,8 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="129dp"
-            android:layout_height="111dp"
+            android:layout_width="185dp"
+            android:layout_height="241dp"
             android:layout_marginStart="93dp"
             android:layout_marginTop="45dp"
             android:layout_marginEnd="93dp"
@@ -34,11 +34,11 @@
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.312"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.75"
-            app:srcCompat="@drawable/perfil"
+            app:layout_constraintVertical_bias="0.2"
+            app:srcCompat="@drawable/capturar2"
             tools:srcCompat="@drawable/capturar2" />
 
         <EditText
