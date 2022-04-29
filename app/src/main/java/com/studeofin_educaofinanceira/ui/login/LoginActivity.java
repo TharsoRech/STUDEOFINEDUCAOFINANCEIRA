@@ -177,8 +177,9 @@ public class LoginActivity extends AppCompatActivity {
         EsqueceuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(LoginActivity.this, recuperar_senha.class);
-                LoginActivity.this.startActivity(myIntent);
+               // testegetmethod();
+               Intent myIntent = new Intent(LoginActivity.this, recuperar_senha.class);
+               LoginActivity.this.startActivity(myIntent);
             }
         });
         SairButton.setOnClickListener(new View.OnClickListener() {
@@ -217,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void updateUiWithUserTeste(LoggedInUserView model) {
+    private void testegetmethod() {
         try{
             trustEveryone();
             String url = "https://10.0.2.2:44326/api/Login/Logar?email=tharso_rech@hotmail.com&senha=teste";
@@ -231,8 +232,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             msgbox("Resppota",response.toString());
-                            yourPrefrence.saveData("Logado",true);
-                            yourPrefrence.saveData("EmailUser",model.getDisplayName());
+                            //yourPrefrence.saveData("Logado",true);
+                            //yourPrefrence.saveData("EmailUser",model.getDisplayName());
                             Intent myIntent = new Intent(LoginActivity.this, DashBoard.class);
                             LoginActivity.this.startActivity(myIntent);
                             LoginActivity.this.finish();

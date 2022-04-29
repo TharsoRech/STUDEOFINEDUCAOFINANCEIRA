@@ -6,48 +6,59 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_Planejamento"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/ic_calendario_2"
+            android:src="@drawable/ic_calendario_2"
             android:title="@string/Planejamento" />
         <item
             android:id="@+id/nav_Gerir"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/ic_cifra"
+            android:src="@drawable/ic_cifra"
             android:title="@string/GerirReceita" />
         <item
             android:id="@+id/nav_Controle"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/ic_cedulas__1_"
+            android:src="@drawable/ic_cedulas__1_"
             android:title="@string/ControleSaldo" />
         <item
             android:id="@+id/nav_Alerta"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/ic_alertas"
+            android:src="@drawable/ic_alertas"
             android:title="@string/AlertaGastos" />
         <item
             android:id="@+id/nav_Educacional"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/ic_conteudo_educacional"
+            android:src="@drawable/ic_conteudo_educacional"
             android:title="@string/ConteudoEducacional" />
         <item
             android:id="@+id/nav_Indicadores"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/ic_grafico"
+            android:src="@drawable/ic_grafico"
             android:title="@string/Indicadores" />
         <item
             android:id="@+id/nav_Dicas"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/ic_dicas_1651186152872__1_"
+            android:drawable="@drawable/ic_dicas_1651186152872__1_"
             android:title="@string/Dicas" />
         <item
             android:id="@+id/nav_Metas"
-            android:icon="@drawable/metas2"
+            android:icon="@drawable/ic_metas2"
+            android:src="@drawable/ic_metas2"
             android:title="@string/Metas" />
         <item
             android:id="@+id/nav_Forum"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/ic_forum_svgrepo_com"
+            android:src="@drawable/ic_forum_svgrepo_com"
             android:title="@string/Forum" />
         <item
             android:id="@+id/nav_Perfil"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/perfil"
+            android:src="@drawable/perfil"
             android:onClick="Perfil"
             android:title="@string/Perfil" />
         <item
             android:id="@+id/nav_Sair"
-            android:icon="@drawable/calendario_2"
+            android:icon="@drawable/ic_sair"
+            android:src="@drawable/ic_sair"
             android:onClick="Logout"
             android:title="@string/Sair" />
     </group>

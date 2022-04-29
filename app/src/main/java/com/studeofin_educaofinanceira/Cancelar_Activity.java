@@ -51,7 +51,7 @@ public class Cancelar_Activity extends AppCompatActivity {
     }
 
     public void CancelarButton(){
-        Intent myIntent = new Intent(Cancelar_Activity.this, DashBoard.class);
+        Intent myIntent = new Intent(Cancelar_Activity.this, conta.class);
         Cancelar_Activity.this.startActivity(myIntent);
         Cancelar_Activity.this.finish();
     }
