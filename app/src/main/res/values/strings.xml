@@ -41,7 +41,7 @@
     <string name="Ok">Ok</string>
     <string name="Cancelar">Cancelar</string>
     <string name="Planejamento">Planejamento Financeiro</string>
-    <string name="GerirReceita">Gerir Receita de despesas</string>
+    <string name="GerirReceita">Gerir Receita e despesas</string>
     <string name="ControleSaldo">Controle de Saldo</string>
     <string name="AlertaGastos">Alerta de Gastos</string>
     <string name="ConteudoEducacional">Conteúdo Educacional</string>
@@ -54,4 +54,8 @@
     <string name="PerderDados">Voce perderá todos os seus dados!\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tDeseja realmente cancelar sua conta?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="Tipos">
+        <item>Receita</item>
+        <item>Despesa</item>
+    </string-array>
 </resources>
