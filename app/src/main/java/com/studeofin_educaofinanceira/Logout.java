@@ -64,9 +64,6 @@ public class Logout extends AppCompatActivity {
 
     public void Confirmar(){
         yourPrefrence.saveData("Logado",false);
-        yourPrefrence.saveData("EmailUser","");
-        yourPrefrence.saveData("Nome","");
-        yourPrefrence.saveData("Sobrenome","");
         Intent myIntent = new Intent(Logout.this, LoginActivity.class);
         Logout.this.startActivity(myIntent);
         Toast.makeText(this, "Logoff Efetuado Com Sucesso", Toast.LENGTH_LONG).show();

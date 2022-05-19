@@ -16,6 +16,18 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.studeofin_educaofinanceira.data.model.GerirDespesaClass;
+import com.studeofin_educaofinanceira.data.model.ListaDespesa;
+import com.studeofin_educaofinanceira.data.model.YourPreference;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -29,6 +41,7 @@ public class GerirDespesasFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public YourPreference yourPrefrence;
     View myView = null;
     TableLayout ll = null;
     EditText Descricao = null;
@@ -80,7 +93,9 @@ public class GerirDespesasFragment extends Fragment {
         Descricao = (EditText) myView.findViewById(R.id.DescricaoText);
         Valor = (EditText) myView.findViewById(R.id.ValorText);
         Tipos = (Spinner) myView.findViewById(R.id.Tipo);
+        yourPrefrence = YourPreference.getInstance(this.getActivity());
         ll = (TableLayout) myView.findViewById(R.id.Tabela);
+        AtualizarListaRow();
         AdicionarrButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -178,13 +193,57 @@ public class GerirDespesasFragment extends Fragment {
             qty2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(qty2);
             ll.addView(row,ll.getChildCount());
+            AtualizarLista();
+
+
 
     }
 
+
+    public void AtualizarLista(){
+        ListaDespesa lista = new ListaDespesa();
+        lista.data = new ArrayList<>();
+        for(int i = 0, j = ll.getChildCount(); i < j; i++) {
+            View view = ll.getChildAt(i);
+            if (view instanceof TableRow && i > 0) {
+                // then, you can remove the the row you want...
+                // for instance...
+                TableRow row = (TableRow) view;
+                TextView descText = ((TextView)((TableRow)ll.getChildAt(i)).getChildAt(0));
+                TextView valorText = ((TextView)((TableRow)ll.getChildAt(i)).getChildAt(1));
+                TextView tipoText = ((TextView)((TableRow)ll.getChildAt(i)).getChildAt(2));
+
+                GerirDespesaClass gerir = new GerirDespesaClass();
+                gerir.Descricao = descText.getText().toString();
+                gerir.Valor = valorText.getText().toString();
+                gerir.tipo = tipoText.getText().toString();
+                lista.data.add(gerir);
+            }
+        }
+        if(lista.data.size() > 0){
+            String str = new Gson().toJson(lista);
+            yourPrefrence.saveData("ListaDespesa",str);
+        }
+    }
+
+    public void AtualizarListaRow(){
+        String lista = yourPrefrence.getData("ListaDespesa");
+        if(lista != null  && lista.length() >0 ){
+            Type userListType = new TypeToken<ListaDespesa>(){}.getType();
+            Gson gson = new Gson();
+            ListaDespesa outputList = gson.fromJson(lista, userListType);
+            for (GerirDespesaClass var : outputList.data)
+            {
+                AdicionarRow(var.Descricao,var.Valor, var.tipo);
+            }
+        }
+
+    }
     public void ExcluirRow(int index){
         ll.removeViewAt(index);
         Valor.setText("");
         Descricao.setText("");
+        AtualizarLista();
     }
 
     public void EditarRow(String descricao,String valor,String tipo){
@@ -195,6 +254,7 @@ public class GerirDespesasFragment extends Fragment {
                 valorText.setText(valor);
                 TextView tipoText = ((TextView)((TableRow)ll.getChildAt(RowSelectndex)).getChildAt(2));
                 tipoText.setText(tipo);
+        AtualizarLista();
     }
 
     public void msgbox(String str,String str2)

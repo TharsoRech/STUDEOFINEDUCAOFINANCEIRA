@@ -156,8 +156,24 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try{
                     loadingProgressBar.setVisibility(View.VISIBLE);
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                    boolean podeLogar = false;
+                    boolean logadoSucesso = false;
+                    String usuarioText = usernameEditText.getText().toString();
+                    String senhaText = passwordEditText.getText().toString();
+                    String email = yourPrefrence.getData("EmailUser");
+                    String senha = yourPrefrence.getData("Senha");
+                    if((email != null && senha!= null) && (email.length() >0 && senha.length() >0)){
+                        podeLogar = true;
+                        logadoSucesso= (usuarioText.equals(email) && senhaText.equals(senha));
+                    }
+                    if(podeLogar && logadoSucesso){
+                        loginViewModel.login(usernameEditText.getText().toString(),
+                                passwordEditText.getText().toString());
+                    }
+                    else{
+                      msgbox("Login","Usuario ou senha incorretos");
+                    }
+                    loadingProgressBar.setVisibility(View.INVISIBLE);
                 }
                 catch (Exception ex){
                     Toast toast=Toast. makeText(getApplicationContext(),ex.getMessage(),Toast. LENGTH_SHORT);
@@ -199,8 +215,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         yourPrefrence = YourPreference.getInstance(LoginActivity.this);
-        //yourPrefrence.removeData("Foto");
-       // yourPrefrence.saveData("HasFoto",false);
         yourPrefrence.saveData("Logado",false);
 
     }
@@ -208,7 +222,6 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUiWithUser(LoggedInUserView model) {
         try{
            yourPrefrence.saveData("Logado",true);
-          yourPrefrence.saveData("EmailUser",model.getDisplayName());
           Intent myIntent = new Intent(LoginActivity.this, DashBoard.class);
           LoginActivity.this.startActivity(myIntent);
           LoginActivity.this.finish();

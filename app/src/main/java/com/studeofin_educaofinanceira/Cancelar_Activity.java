@@ -61,6 +61,8 @@ public class Cancelar_Activity extends AppCompatActivity {
         yourPrefrence.saveData("EmailUser","");
         yourPrefrence.saveData("Nome","");
         yourPrefrence.saveData("Sobrenome","");
+        yourPrefrence.saveData("ListaDespesa","");
+        yourPrefrence.saveData("ListaMeta","");
         Intent myIntent = new Intent(Cancelar_Activity.this, LoginActivity.class);
         Cancelar_Activity.this.startActivity(myIntent);
         Toast.makeText(this, "Conta Cancelada com Sucesso", Toast.LENGTH_LONG).show();

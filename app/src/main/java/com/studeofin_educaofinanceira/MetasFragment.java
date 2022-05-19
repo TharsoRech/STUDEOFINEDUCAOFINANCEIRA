@@ -20,7 +20,17 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.studeofin_educaofinanceira.data.model.GerirDespesaClass;
+import com.studeofin_educaofinanceira.data.model.ListaDespesa;
+import com.studeofin_educaofinanceira.data.model.ListaMetas;
+import com.studeofin_educaofinanceira.data.model.MetasClass;
+import com.studeofin_educaofinanceira.data.model.YourPreference;
+
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -41,6 +51,7 @@ public class MetasFragment extends Fragment {
     EditText Descricao = null;
     EditText Valor =  null;
     EditText DataMeta = null;
+    public YourPreference yourPrefrence;
     final Calendar myCalendar= Calendar.getInstance();
     int RowSelectndex = 0;
     // TODO: Rename and change types of parameters
@@ -94,7 +105,9 @@ public class MetasFragment extends Fragment {
         Descricao = (EditText) myView.findViewById(R.id.descricaoMetaText);
         Valor = (EditText) myView.findViewById(R.id.valorMetaText);
         DataMeta = (EditText) myView.findViewById(R.id.DataMeta);
+        yourPrefrence = YourPreference.getInstance(this.getActivity());
         ll = (TableLayout) myView.findViewById(R.id.TabelaMeta);
+        AtualizarListaRow();
         AdicionarrButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -107,6 +120,10 @@ public class MetasFragment extends Fragment {
                 if(Valor.getText().length() <= 0 && PodeAdd){
                     PodeAdd = false;
                     msgbox("Informação Faltante","Campo Valor em Branco");
+                }
+                if(DataMeta.getText().length() <= 0 && PodeAdd){
+                    PodeAdd = false;
+                    msgbox("Informação Faltante","Campo Data em Branco");
                 }
                 if(PodeAdd){
                     AdicionarRow(Descricao.getText().toString(),Valor.getText().toString(),DataMeta.getText().toString());
@@ -207,6 +224,7 @@ public class MetasFragment extends Fragment {
         qty2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         row.addView(qty2);
         ll.addView(row,ll.getChildCount());
+        AtualizarLista();
 
     }
 
@@ -215,6 +233,7 @@ public class MetasFragment extends Fragment {
         Valor.setText("");
         Descricao.setText("");
         DataMeta.setText("");
+        AtualizarLista();
     }
 
     public void EditarRow(String descricao,String valor,String tipo){
@@ -225,6 +244,47 @@ public class MetasFragment extends Fragment {
         valorText.setText(valor);
         TextView tipoText = ((TextView)((TableRow)ll.getChildAt(RowSelectndex)).getChildAt(2));
         tipoText.setText(tipo);
+        AtualizarLista();
+    }
+
+    public void AtualizarLista(){
+        ListaMetas lista = new ListaMetas();
+        lista.data = new ArrayList<>();
+        for(int i = 0, j = ll.getChildCount(); i < j; i++) {
+            View view = ll.getChildAt(i);
+            if (view instanceof TableRow && i > 0) {
+                // then, you can remove the the row you want...
+                // for instance...
+                TableRow row = (TableRow) view;
+                TextView descText = ((TextView)((TableRow)ll.getChildAt(i)).getChildAt(0));
+                TextView valorText = ((TextView)((TableRow)ll.getChildAt(i)).getChildAt(1));
+                TextView tipoText = ((TextView)((TableRow)ll.getChildAt(i)).getChildAt(2));
+
+                MetasClass meta = new MetasClass();
+                meta.Objetivo = descText.getText().toString();
+                meta.Valor = valorText.getText().toString();
+                meta.Data = tipoText.getText().toString();
+                lista.data.add(meta);
+            }
+        }
+        if(lista.data.size() > 0){
+            String str = new Gson().toJson(lista);
+            yourPrefrence.saveData("ListaMeta",str);
+        }
+    }
+
+    public void AtualizarListaRow(){
+        String lista = yourPrefrence.getData("ListaMeta");
+        if(lista != null  && lista.length() >0 ){
+            Type userListType = new TypeToken<ListaMetas>(){}.getType();
+            Gson gson = new Gson();
+            ListaMetas outputList = gson.fromJson(lista, userListType);
+            for (MetasClass var : outputList.data)
+            {
+                AdicionarRow(var.Objetivo,var.Valor, var.Data);
+            }
+        }
+
     }
 
     public void msgbox(String str,String str2)

@@ -3,6 +3,8 @@ package com.studeofin_educaofinanceira.data;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.studeofin_educaofinanceira.data.model.LoggedInUser;
+import com.studeofin_educaofinanceira.data.model.YourPreference;
+import com.studeofin_educaofinanceira.ui.login.LoginActivity;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -11,6 +13,7 @@ import com.studeofin_educaofinanceira.data.model.LoggedInUser;
 public class LoginRepository {
 
     private static volatile LoginRepository instance;
+    public YourPreference yourPrefrence;
 
     private LoginDataSource dataSource;
 

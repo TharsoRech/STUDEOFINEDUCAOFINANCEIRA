@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DicasInvestimentoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <WebView
+        android:id="@+id/webView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/Dicas" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="67dp">
 
-</FrameLayout>
+    </WebView>
+
+    <TableLayout
+        android:id="@+id/TabelaDicas"
+        android:layout_width="379dp"
+        android:layout_height="679dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="31dp"
+        android:isScrollContainer="true"
+        android:stretchColumns="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/tableRowMeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:stretchColumns="1">
+
+            <TextView
+                android:layout_width="327dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:padding="3dip"
+                android:text=""
+                android:textAlignment="center"
+                tools:layout_conversion_absoluteHeight="26dp"
+                tools:layout_conversion_absoluteWidth="69dp"
+                tools:layout_editor_absoluteX="13dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+
+        </TableRow>
+    </TableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

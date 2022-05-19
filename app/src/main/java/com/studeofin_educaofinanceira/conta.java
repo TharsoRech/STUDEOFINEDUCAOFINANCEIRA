@@ -134,6 +134,7 @@ public class conta extends AppCompatActivity {
                         yourPrefrence.saveData("EmailUser",Email.getText().toString());
                         yourPrefrence.saveData("Nome",nome.getText().toString());
                         yourPrefrence.saveData("Sobrenome",Sobrenome.getText().toString());
+                        yourPrefrence.saveData("Senha",Senha.getText().toString());
                         yourPrefrence.saveData("HasFoto",HasFoto);
                         msgboxSucessoLogado("Sucesso","Usuário Alterado com sucesso");
                     }
@@ -141,6 +142,7 @@ public class conta extends AppCompatActivity {
                         yourPrefrence.saveData("EmailUser",Email.getText().toString());
                         yourPrefrence.saveData("Nome",nome.getText().toString());
                         yourPrefrence.saveData("Sobrenome",Sobrenome.getText().toString());
+                        yourPrefrence.saveData("Senha",Senha.getText().toString());
                         yourPrefrence.saveData("HasFoto",HasFoto);
                         msgboxSucesso("Sucesso","Usuário Cadastrado com sucesso");
                     }
