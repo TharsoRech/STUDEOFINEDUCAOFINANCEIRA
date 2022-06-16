@@ -127,6 +127,9 @@ public class MetasFragment extends Fragment {
                 }
                 if(PodeAdd){
                     AdicionarRow(Descricao.getText().toString(),Valor.getText().toString(),DataMeta.getText().toString());
+                    Descricao.setText("");
+                    Valor.setText("");
+                    DataMeta.setText("");
                     msgbox("Inserção de Meta","Meta Adicionada com sucesso");
                 }
             }

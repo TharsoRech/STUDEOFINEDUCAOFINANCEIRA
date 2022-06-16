@@ -111,6 +111,8 @@ public class GerirDespesasFragment extends Fragment {
                 }
                 if(PodeAdd){
                     AdicionarRow(Descricao.getText().toString(),Valor.getText().toString(),Tipos.getSelectedItem().toString());
+                    Descricao.setText("");
+                    Valor.setText("");
                     msgbox("Inserção de Despesa/Receita","Despesa/Receita Adicionada com sucesso");
                 }
             }
