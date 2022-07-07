@@ -131,6 +131,7 @@ public class MetasFragment extends Fragment {
                     Valor.setText("");
                     DataMeta.setText("");
                     msgbox("Inserção de Meta","Meta Adicionada com sucesso");
+
                 }
             }
         });
